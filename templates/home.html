@@ -1,0 +1,43 @@
+<html>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .motet {
+            width: 250px;
+        }
+        .center-block{
+                width: 500%;
+                position: fixed;
+                top: calc(50vh - 175px);
+                left: 50%;
+                transform: translate(-50%);
+        }
+        * {
+            margin: 0;
+            font-family: 'Roboto Mono', monospace;
+        }
+        h1 {
+            margin-bottom: 1em;
+        }
+        h2 {
+            margin-top: 0.5em;
+        }
+        #button {
+            top: calc(50vh - 150px);
+        }
+
+    </style>
+    <body bgcolor="d4a3ae">
+        <center>
+        <div class="center-block">
+            <h1>Language Identification</h1>
+            <form method="POST", action="{{url_for('home')}}">
+                <textarea type="text", placeholder="Some words...", name="input" class="motet" rows=5></textarea>
+                <input type="submit" , value="Predict" id="button">
+            </form>
+            {% if result%}
+                <h2>Language is {{result}}</h2>
+            {% endif %}
+        </div>
+        </center>
+    </body>
+</html>
