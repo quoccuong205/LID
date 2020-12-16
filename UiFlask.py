@@ -5,6 +5,7 @@ import pickle
 from io import open
 from tensorflow import keras
 from flask import Flask, render_template, request
+import sys
 
 max_sentence_length = 50
 #embedding_vector_length = 300
@@ -27,7 +28,7 @@ def home():
     print("Vocab loaded!")
 
     # Doc model tu file
-    model = keras.models.load_model('model.h5')
+    model = load_model()
     print("Model loaded!")
     predSentence = request.form['input']
     result = predict_sentence(model, predSentence, vocab_to_int, int_to_languages)
@@ -66,6 +67,10 @@ def predict_sentence(model, sentence,  vocab_to_int, int_to_languages):
         return "Unknown"
     else:
         return int_to_languages[lang_index]
+
+def load_model():
+    model = keras.models.load_model(sys.argv[1])
+    return model
 
 if __name__ == "__main__":
     app.run()
